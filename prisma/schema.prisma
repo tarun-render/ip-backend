@@ -1,0 +1,133 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String     @id @default(uuid())
+  email           String     @unique
+  password        String
+  activete_at     DateTime?
+  address_line1   String?
+  avatar          String?
+  city            String?
+  country         String?
+  country_code    String?
+  created_at      DateTime   @default(now())
+  email_confirmed Boolean?   @default(false)
+  extra_config    String?
+  geo_location    String?
+  is_active       Boolean    @default(false)
+  landmark        String?
+  phone           String?
+  photo_url       String?
+  remember_token  String?
+  state           String?
+  two_factor_code String?
+  updated_att     DateTime   @updatedAt
+  zipcode         String?
+  first_name      String
+  last_name       String?
+  role            String     @default("CLIENT")
+  address_line2   String?
+  bookmarks       Bookmark[]
+  orders          Order[]
+
+  @@map("users")
+}
+
+model Bookmark {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  description String?
+  link        String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "bookmarks_userId_fkey")
+  @@map("bookmarks")
+}
+
+model Order {
+  id              String       @id @default(uuid())
+  title           String
+  description     String?
+  type            String
+  status          String
+  statusMessage   String?       @default("")
+  estimatedDate   DateTime?     @default(now())
+  requirementDate DateTime?     @default(now())
+  createdById     String
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  items           OrderItem[]
+  user            User         @relation(fields: [createdById], references: [id])
+
+  @@index([createdById], map: "orders_createdById_fkey")
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  itemType  String
+  orderId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  order     Order    @relation(fields: [orderId], references: [id])
+
+  @@index([orderId], map: "OrderItems_orderId_fkey")
+
+  @@map("orderItems")
+}
+ model Project{
+
+  id              String       @id @default(uuid())
+  title           String
+  description     String?
+  type            String
+  status          String
+  statusMessage   String
+  estimatedDate   DateTime
+ }
+
+
+  model Role{
+
+  id              String        @id @default(uuid())
+  name            String        @unique
+  description     String?       @default("")
+  color           String        @default("#000000")
+  level           Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  isActive        Boolean       @default(true)
+  status          OrderStatus[]
+  @@map("roles")
+ }
+
+  model OrderStatus{
+
+  id              String       @id @default(uuid())
+  name            String
+  level           Int?       
+  roleId          String  
+  statusMsg       String        @default("")
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  isActive        Boolean       @default(true)
+  
+  role            Role         @relation(fields: [roleId], references: [id])
+
+  @@map("order_status")
+ }
+
+
+
+
+
