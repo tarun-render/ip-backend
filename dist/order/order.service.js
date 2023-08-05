@@ -39,6 +39,7 @@ let OrderService = class OrderService {
                 requirementDate: requirementDate ? new Date(requirementDate) : new Date()
             },
         });
+        console.log(order);
         return order;
     }
     async updateOrder(userId, dto) {
@@ -69,16 +70,16 @@ let OrderService = class OrderService {
     }
     async getOrdersWithUserInfo() {
         const rawSQL = `call ip_portal.sp_get_orders()`;
-        return this.prisma.$queryRaw(client_1.Prisma.sql `SELECT * FROM ip_portal.orders ipo
-    INNER JOIN ip_portal.users ipu 
-    ON ipo.createdById = ipu.id
-    order by createdAt;`);
+        return this.prisma.$queryRaw(client_1.Prisma.sql `SELECT ipo.*,ipu.first_name,ipu.role,ipu.phone FROM ip_portal.orders ipo
+    JOIN ip_portal.users ipu 
+  ON ipo.createdById = ipu.id 
+  order by createdAt;`);
     }
     getAllOrders() {
-        return this.prisma.$queryRaw(client_1.Prisma.sql `SELECT * FROM ip_portal.orders ipo
-   INNER JOIN ip_portal.users ipu 
-   ON ipo.createdById = ipu.id
-   order by createdAt;`);
+        return this.prisma.$queryRaw(client_1.Prisma.sql `SELECT ipo.*,ipu.first_name,ipu.role,ipu.phone FROM ip_portal.orders ipo
+   JOIN ip_portal.users ipu 
+ ON ipo.createdById = ipu.id 
+ order by createdAt;`);
     }
 };
 OrderService = __decorate([
