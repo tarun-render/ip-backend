@@ -22,7 +22,10 @@ export class OrderController {
     return this.orderService.getAllOrders();
   }
 
-  
+  @Get('/allwithUser')
+  getAllOrdersWithUser() {
+    return this.orderService.getOrdersWithUserInfo();
+  }
   @Get(':id')
   getOrder(@Param('id') orderId: string,
   @GetUser('id') userId: string) {  

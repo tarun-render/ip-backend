@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { Order } from '@prisma/client';
+import { Order, Prisma } from '@prisma/client';
 import { updateOrderDto } from './dto/update-order.dto';
 
 
@@ -41,6 +41,7 @@ export class OrderService {
         requirementDate:requirementDate ? new Date(requirementDate) :  new Date()
       },
     });
+    console.log(order)
     return order;
   }
   async updateOrder(userId: string, dto: updateOrderDto) {
@@ -74,9 +75,24 @@ export class OrderService {
     });
   }
 
-   
+ async getOrdersWithUserInfo() {
+  // NOT IN USE
+    const rawSQL = `call ip_portal.sp_get_orders()`;
+    return this.prisma.$queryRaw( Prisma.sql`SELECT ipo.*,ipu.first_name,ipu.role,ipu.phone FROM ip_portal.orders ipo
+    JOIN ip_portal.users ipu 
+  ON ipo.createdById = ipu.id 
+  order by createdAt;`);
+    // console.log("----- Result -------")
+    // console.log(res)
+  }
+
   getAllOrders() {
-    return this.prisma.order.findMany( );
+   // return this.prisma.order.findMany( );
+  // const rawSQL = `call ip_portal.sp_get_orders()`;
+   return this.prisma.$queryRaw( Prisma.sql`SELECT ipo.*,ipu.first_name,ipu.role,ipu.phone FROM ip_portal.orders ipo
+   JOIN ip_portal.users ipu 
+ ON ipo.createdById = ipu.id 
+ order by createdAt;`);
   }
 
 

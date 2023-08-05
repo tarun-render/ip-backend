@@ -15,4 +15,13 @@ export class UpdateRoleDto extends CreateRoleDto {
     @IsBoolean()
     @IsNotEmpty()
     isActive: boolean;
+
+
+    @IsBoolean()
+    @IsNotEmpty()
+    canAdmin: boolean;
+
+    @IsBoolean()
+    @IsNotEmpty()
+    canReview: boolean;
 }
