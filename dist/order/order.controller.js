@@ -30,6 +30,9 @@ let OrderController = class OrderController {
     getAllOrders() {
         return this.orderService.getAllOrders();
     }
+    getAllOrdersWithUser() {
+        return this.orderService.getOrdersWithUserInfo();
+    }
     getOrder(orderId, userId) {
         return this.orderService.getOrderById(userId, orderId);
     }
@@ -53,6 +56,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], OrderController.prototype, "getAllOrders", null);
+__decorate([
+    (0, common_2.Get)('/allwithUser'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], OrderController.prototype, "getAllOrdersWithUser", null);
 __decorate([
     (0, common_2.Get)(':id'),
     __param(0, (0, common_2.Param)('id')),

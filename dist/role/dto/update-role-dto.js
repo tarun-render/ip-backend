@@ -24,5 +24,15 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Boolean)
 ], UpdateRoleDto.prototype, "isActive", void 0);
+__decorate([
+    (0, class_validator_1.IsBoolean)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Boolean)
+], UpdateRoleDto.prototype, "canAdmin", void 0);
+__decorate([
+    (0, class_validator_1.IsBoolean)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Boolean)
+], UpdateRoleDto.prototype, "canReview", void 0);
 exports.UpdateRoleDto = UpdateRoleDto;
 //# sourceMappingURL=update-role-dto.js.map

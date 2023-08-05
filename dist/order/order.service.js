@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const client_1 = require("@prisma/client");
 let OrderService = class OrderService {
     constructor(prisma) {
         this.prisma = prisma;
@@ -66,8 +67,18 @@ let OrderService = class OrderService {
             },
         });
     }
+    async getOrdersWithUserInfo() {
+        const rawSQL = `call ip_portal.sp_get_orders()`;
+        return this.prisma.$queryRaw(client_1.Prisma.sql `SELECT * FROM ip_portal.orders ipo
+    INNER JOIN ip_portal.users ipu 
+    ON ipo.createdById = ipu.id
+    order by createdAt;`);
+    }
     getAllOrders() {
-        return this.prisma.order.findMany();
+        return this.prisma.$queryRaw(client_1.Prisma.sql `SELECT * FROM ip_portal.orders ipo
+   INNER JOIN ip_portal.users ipu 
+   ON ipo.createdById = ipu.id
+   order by createdAt;`);
     }
 };
 OrderService = __decorate([
