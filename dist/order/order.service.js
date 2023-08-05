@@ -55,7 +55,6 @@ let OrderService = class OrderService {
                 status,
                 statusMessage,
                 estimatedDate: estimatedDate ? new Date(estimatedDate) : new Date(),
-                createdById: userId,
                 requirementDate: requirementDate ? new Date(requirementDate) : new Date()
             },
         });

@@ -58,8 +58,7 @@ export class OrderService {
          type,   
          status,    
          statusMessage,   
-         estimatedDate :estimatedDate ? new Date(estimatedDate) : new Date(), 
-         createdById:userId,      
+         estimatedDate :estimatedDate ? new Date(estimatedDate) : new Date(),  
          requirementDate:requirementDate ? new Date(requirementDate) :  new Date()
        },
      });
