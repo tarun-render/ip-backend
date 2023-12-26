@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
     IsNotEmpty,
     IsNumber,
     IsOptional,
@@ -22,6 +23,20 @@ import {
     @IsString()
     @IsNotEmpty()
     color: string;
+
+
+
+
+    @IsBoolean()
+    @IsNotEmpty()
+    canAdmin: boolean;
+
+
+
+    @IsBoolean()
+    @IsNotEmpty()
+    canReview: boolean;
+    
     
   }
   

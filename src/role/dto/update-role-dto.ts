@@ -24,4 +24,5 @@ export class UpdateRoleDto extends CreateRoleDto {
     @IsBoolean()
     @IsNotEmpty()
     canReview: boolean;
+    
 }
