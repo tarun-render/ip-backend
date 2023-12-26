@@ -8,7 +8,7 @@ export class PrismaService extends PrismaClient {
     super({
       datasources: {
         db: {
-          url: "mysql://admin:Pa55w0rd!@dbhub.ccfdgvoqslzp.ap-south-2.rds.amazonaws.com/ip_portal",
+          url: "mysql://admin:Pa55w0rd1!@uidesignrabbit.ccfdgvoqslzp.ap-south-2.rds.amazonaws.com/ip_portal",
         },
       },
     });
