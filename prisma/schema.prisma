@@ -107,6 +107,8 @@ model OrderItem {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
   isActive        Boolean       @default(true)
+  canAdmin        Boolean       @default(false)
+  canReview        Boolean      @default(false)
   status          OrderStatus[]
   @@map("roles")
  }
