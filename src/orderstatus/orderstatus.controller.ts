@@ -43,7 +43,9 @@ createOrderStatus(
 
 @Put()
 updateOrderStatus(@Body() dto:UpdateOrderStatusDto) {
-  return this.orderStatusService.updateOrderStatus(
+
+    console.log("Updated COde..!!");
+    return this.orderStatusService.updateOrderStatus(
     dto
   );
 }
